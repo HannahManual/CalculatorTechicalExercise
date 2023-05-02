@@ -1,0 +1,198 @@
+'''
+Date: 01/05/2023
+Authour: Hannah Manual Jebakumar
+Project: Calculator Application
+Function: This calculator program can be used for simple calculations.
+It can also allow the user to do various conversions.
+
+'''
+#This os library provides an easy way for the user to interact with several os functions .
+#The time module is a standard Python module that offers functions for accessing and converting time. 
+import os
+import time
+
+#First the user is given a choice, to either access the calculator or the converter
+print("Type 'C' to access the calculator.")
+print("Type 'V' to access the converter.")
+
+#The input is defined as a variable "choice1" 
+choice1 = input("Enter your choice:")
+
+'''
+
+This function allows the converter to loop, without running the program
+multiple times.
+
+'''
+
+def convert_again():
+    con_again = input("Do you want to continue? (Y/N) or do you want to access the calculator?(C): ")
+
+    if con_again.upper() == 'Y':
+        convert()
+    elif con_again.upper() == 'N':
+        print('See you later.')
+    elif con_again.upper() == 'C':
+        calculate()
+    else:
+        convert_again()
+'''
+
+This function allows the calculator to loop, without running the program
+multiple times.
+
+'''
+                
+def again():
+    calc_again = input("Do you want to continue? (Y/N) or do you want to access the converter?(V): ")
+
+    if calc_again.upper() == 'Y':
+        calculate()
+    elif calc_again.upper() == 'N':
+        print('See you later.')
+    elif calc_again.upper() == 'V':
+        convert()
+    elif calc_again.upper()=='H':
+        my_file = open("history1.txt", "r")
+        print("")
+        print(my_file.read())
+        timer()
+    else:
+        again()
+
+'''
+
+This calculate function can be used for addtion, subtraction, multiplication and division.
+
+'''
+
+def calculate():
+
+            
+    sign = input("Enter one of these signs (+,-,*,-): ")
+    num1 = float(input("Enter a number: "))
+    num2 = float(input("Enter another number:"))
+#Addition
+                        
+    if sign == "+":
+        print (num1, "+", num2, "=", (num1 + num2))
+        add = str(num1 + num2)
+        print ("The result is ",add)
+        history(add)
+        timer()
+#Subtract                            
+    elif sign == "-":
+        print (num1, "-", num2, "=", (num1 - num2))
+        sub = str(num1 - num2)
+        print ("The result is ",sub)
+        history(sub)
+        timer()
+#Division                            
+                            
+    elif sign == "/":
+        print (num1, "/", num2, "=", (num1 / num2))
+        div = str(num1 / num2)
+        print ("The result is ",div)
+        history(div)
+        timer()
+#Multipication                          
+
+    elif sign == "*":
+        print (num1, "*", num2, "=", (num1 * num2))
+        mult = str(num1 * num2)
+        print ("The result is ",mult)
+        history(mult)
+        timer()
+        
+#If anything else is entered, then an error message is displayed
+    else:
+        print("Error, please follow the instructions!")
+    again()
+    
+#This function writes the result of previous calculations/ values in a file called 'history.txt' 
+def history(para):
+    my_file = open("history1.txt", "a")
+    my_file = my_file.write(str(para)+"\n")
+    again()
+    
+#This function is used to delay the display
+def timer():
+    time.sleep(1)
+    print("")
+    print("--------------------------------------------------------------------------")
+
+
+
+    
+
+#This function is used to convert various measures
+                
+def convert():
+     
+         
+    print("Enter '1' for kilos to stone")
+    print("Enter '2' for gigabytes to bytes")
+    print("Enter '3' for inches to centimetres")
+    print("Enter '4' for days to seconds")
+    print("Enter '5' to convert from decimal to binary")
+    print("Enter '6' to convert from decimal to hexadecimal")
+    print("Enter '7' to convert from decimal to octal")
+
+    choice2 = input("Enter your choice:")
+#Option 1 is used to convert from kilos to stone
+    if choice2 == '1':
+        kilos = float(input("Enter the number of kilos:"))
+        stone = (kilos/6.35)
+        print(kilos, "kilos =", stone, "stone.")
+        
+#Option 2 is used to convert from gigabytes to bytes                   
+    elif choice2 == '2':
+        gigabytes = float(input("Enter the number of gigabytes:"))
+        bytes = (gigabytes*1000000000)
+        print(gigabytes, "gigabytes =", bytes, "bytes.")
+        
+#Option 3 is used to convert from inches to centimetres               
+    elif choice2 == '3':
+        inches = float(input("Enter the number of inches:"))
+        centimetres = (inches*2.54)
+        print(inches, "inches =", centimetres, "centimetres.")
+        
+#Option 4 is used to convert from days to seconds
+    elif choice2 == '4':
+        days = float(input("Enter the number of days:"))
+        seconds = (days*86400)
+        print(days, "days =", seconds, "seconds.")
+        
+#Option 5 is used to convert from decimal to binary
+    elif choice2 == '5':
+        decimal = int(input("Enter the decimal number: "))
+        binary = bin(decimal)
+        print(binary)
+        
+#Option 6 is used to convert from decimal to hexadecimal
+    elif choice2 == '6':
+        decimal = int(input("Enter the decimal number: "))
+        hexadecimal = hex(decimal)
+        print(hexadecimal)
+        
+#Option 7 is used to convert from decimal to octal
+    elif choice2 == '7':
+        decimal = int(input("Enter the decimal number: "))
+        octal = oct(decimal)
+        print(octal)
+        
+#If an invalid option is entered, an error message is displayed
+    else:
+        print("Error, please follow the instructions:")
+    convert_again()
+
+#Calling the functions based on the choice
+
+if choice1 == 'C':
+    calculate()
+
+if choice1 == 'V':
+    convert()
+
+
+
